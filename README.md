@@ -1,5 +1,6 @@
 # data
-Clone this project, and add the path to $HOME/.profile as below.  
+Clone this project,
+and add the path to $HOME/.profile as below in your appropriate directory.  
 
     $ git clone https://github.com/leorge/data.git
     $ echo $PATH                       # confirm
