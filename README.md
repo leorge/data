@@ -8,4 +8,4 @@ Clone this project, and add the path to $HOME/.profile as below.
 
 Login again.
 
-    $ random.awk 11 | xargs echo
+    $ random.awk 22 | xargs echo
