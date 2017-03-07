@@ -2,7 +2,7 @@ PIVOT=n1n1.awk
 if [ -d .git ] && [ -x $PIVOT ]; then   # in the repository
     git pull
     if ! echo :$PATH: | grep :`pwd`: ; then
-        echo PATH=$PATH:`pwd` >> ~/.profile
+        echo PATH=\$PATH:`pwd` >> ~/.profile
         echo Logout and login again.
     fi
 elif which $PIVOT > /dev/null; then
