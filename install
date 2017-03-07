@@ -15,7 +15,6 @@ elif which $PIVOT > /dev/null; then
             git pull
             if [ -x $PIVOT ]; then
                 bash `basename $0`  # recursive call
-                rm $0
                 exit
             fi
         fi
