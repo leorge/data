@@ -14,7 +14,7 @@ elif which $PIVOT > /dev/null; then
             echo A repository is found.
             git pull
             if [ -x $PIVOT ]; then
-                bash `basename install`  # recursive call
+                bash `basename $0`  # recursive call
                 exit
             fi
         fi
@@ -23,7 +23,7 @@ elif which $PIVOT > /dev/null; then
     rm `which $PIVOT`
     bash $0  # retry
 elif [ -d data ]; then  # the repository may exist
-    cd data && bash $0 && rm $0  # recursive call
+    cd data && bash `basename $0` && rm $0  # recursive call
 else
     INSTALLER=inst_cmd
     if ! which $INSTALLER > /dev/null; then  # not installed.
@@ -34,5 +34,5 @@ else
     fi
     $INSTALLER git gawk perl
     git clone https://github.com/leorge/data.git
-    cd data && bash $0 && rm $0  # recursive call
+    cd data && bash `basename $0` && rm $0  # recursive call
 fi
