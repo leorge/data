@@ -5,6 +5,7 @@ if [ -d .git ] && [ -x $PIVOT ]; then   # in the repository
         echo PATH=\$PATH:`pwd` >> ~/.profile
         echo Logout and login again.
     fi
+    exit
 elif which $PIVOT > /dev/null; then
     echo $PIVOT is available. Searching $PIVOT ...
     for cmd in `find / -name $PIVOT -print 2>/dev/null`; do
@@ -13,8 +14,8 @@ elif which $PIVOT > /dev/null; then
             echo A repository is found.
             git pull
             if [ -x $PIVOT ]; then
-                bash $0  # recursive call
-                exit     # complete
+                bash `basename install`  # recursive call
+                exit
             fi
         fi
     done
@@ -22,7 +23,7 @@ elif which $PIVOT > /dev/null; then
     rm `which $PIVOT`
     bash $0  # retry
 elif [ -d data ]; then  # the repository may exist
-    cd data && bash $0  # recursive call
+    cd data && bash $0 && rm $0  # recursive call
 else
     INSTALLER=inst_cmd
     if ! which $INSTALLER > /dev/null; then  # not installed.
