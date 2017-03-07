@@ -33,5 +33,5 @@ else
     fi
     $INSTALLER git gawk perl
     git clone https://github.com/leorge/data.git
-    cd data && bash $0  # recursive call
+    cd data && bash $0 && rm $0  # recursive call
 fi
