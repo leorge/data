@@ -24,7 +24,7 @@ elif which $PIVOT > /dev/null; then
     rm `which $PIVOT`
     bash $0  # retry
 elif [ -d data ]; then  # the repository may exist
-    cd data && bash `basename $0` && rm $0  # recursive call
+    pushd data && bash `basename $0` && popd && rm $0  # recursive call
 else
     INSTALLER=inst_cmd
     if ! which $INSTALLER > /dev/null; then  # not installed.
@@ -35,5 +35,5 @@ else
     fi
     $INSTALLER git gawk perl
     git clone https://github.com/leorge/data.git
-    cd data && bash `basename $0` && rm $0  # recursive call
+    pushd data && bash `basename $0` && popd && rm $0  # recursive call
 fi
