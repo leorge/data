@@ -35,7 +35,9 @@ else
         chmod +x $TMP/$INSTALLER
         PATH=$PATH:$TMP  # temporarily
     fi
-    $INSTALLER git gawk perl
-    git clone https://github.com/leorge/data.git
-    pushd data && bash `basename $0` && popd && rm $0  # recursive call
+    $INSTALLER gawk perl
+    if $INSTALLER git; then
+        git clone https://github.com/leorge/data.git
+        pushd data && bash `basename $0` && popd && rm $0  # recursive call
+    fi
 fi
