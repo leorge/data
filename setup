@@ -4,9 +4,9 @@ myName=`basename $0`
 REPO=data; INSTALLER=inst_cmd; BIN=~/bin; TMP=/tmp; NULL=/dev/null
 if [ ! -x $BIN/$INSTALLER ]; then
     echo "Please download my scripts."
-	echo "Visit https://github.com/leorge/scripts and read the README.md below in the page."
-elif ! which $INSTALLER > $NULL; then	# ~/bin is absent in $PATH
-	echo "Please logout and login again."
+    echo "Visit https://github.com/leorge/scripts and read the README.md below in the page."
+elif ! which $INSTALLER > $NULL; then   # ~/bin is absent in $PATH
+    echo "Please logout and login again."
 elif [ -d .git ]; then  # in a git repository
     repository=`grep "url = " .git/config | sed 's#.*/\(.*\)\.git#\1#'`
     if [ $repository = $REPO ]; then
@@ -14,7 +14,7 @@ elif [ -d .git ]; then  # in a git repository
         addpath $PWD
     else
         echo This repository \"$repository\" is wrong.
-		exit 1
+        exit 1
     fi
 elif [ -d $REPO ]; then # Scripts are in the sub-directory.
     pushd $REPO && bash $myName && popd && rm $0
