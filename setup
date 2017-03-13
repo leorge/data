@@ -20,11 +20,11 @@ elif [ -d $REPO ]; then # Scripts are in the sub-directory.
     pushd $REPO && bash $myName && popd && rm $myName
 elif $INSTALLER git; then   # not in a repository
     git clone https://github.com/leorge/$REPO.git && \
-    addpath $PWD/$REPO && rm $0
+    addpath $PWD/$REPO && rm $myName
 elif $INSTALLER unzip; then # unzip(1) is available
     ZIP=master.zip
     wget -N https://github.com/leorge/$REPO/archive/$ZIP && \
-    addpath $PWD/$REPO && rm $0
+    addpath $PWD/$REPO && rm $myName
 else
     ERR=$?
     echo "You can not install both git and unzip." >&2
