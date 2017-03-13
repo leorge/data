@@ -8,10 +8,10 @@ if [ ! -x $BIN/$INSTALLER ]; then
 elif ! which $INSTALLER > $NULL; then	# ~/bin is absent in $PATH
 	echo "Please logout and login again."
 elif [ -d .git ]; then  # in a git repository
-    repository=`grep "url = " .git/config | sed -e 's#.*/\(.*\)\.git#\1#'`
+    repository=`grep "url = " .git/config | sed 's#.*/\(.*\)\.git#\1#'`
     if [ $repository = $REPO ]; then
         $INSTALLER git && echo -n "Pulling the repository... " && git pull
-        addpth $PWD
+        addpath $PWD
     else
         echo This repository \"$repository\" is wrong.
 		exit 1
