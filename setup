@@ -5,7 +5,7 @@ REPO=data; INSTALLER=inst_cmd; BIN=~/bin; TMP=/tmp; NULL=/dev/null
 if [ ! -x $BIN/$INSTALLER ]; then
     echo "Please download my scripts."
 	echo "Visit https://github.com/leorge/scripts and read the README.md below in the page."
-elif ! which $INSTALLER; then	# ~/bin is absent in $PATH
+elif ! which $INSTALLER > $NULL; then	# ~/bin is absent in $PATH
 	echo "Please logout and login again."
 elif [ -d .git ]; then  # in a git repository
     repository=`grep "url = " .git/config | sed -e 's#.*/\(.*\)\.git#\1#'`
