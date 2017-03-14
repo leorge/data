@@ -1,29 +1,27 @@
-myName=`basename $0`
-# Try "bash setup" and "bash ./setup" for the following line.
-# echo -n $myName; [ $0 = $myName ] && echo "" || echo " in $0"
-REPO=data; INSTALLER=inst_cmd; BIN=~/bin; TMP=/tmp; NULL=/dev/null
-if [ ! -x $BIN/$INSTALLER ]; then
-    echo "Please download my scripts."
-    echo "Visit https://github.com/leorge/scripts and read the README.md below in the page."
-elif ! which $INSTALLER > $NULL; then   # ~/bin is absent in $PATH
-    echo "Please logout and login again."
-elif [ -d .git ]; then  # in a git repository
+myName=`basename $0`; REPO=data; INSTALLER=inst_cmd; BIN=~/bin; NULL=/dev/null
+if [ -d .git ]; then  # in a git repository
     repository=`grep "url = " .git/config | sed 's#.*/\(.*\)\.git#\1#'`
-    if [ $repository = $REPO ]; then
-        $INSTALLER git && echo -n "Pulling the repository... " && git pull
-        addpath $PWD
-    else
+    if [ $repository != $REPO ]; then
         echo This repository \"$repository\" is wrong.
         exit 1
+    elif which $INSTALLER > $NULL; then
+        $INSTALLER git && git pull
+        addpath $PWD                    # a script "addpath" should be also installed
+    else
+        cd .. && bash $0    # call again
     fi
-elif [ -d $REPO ]; then # Scripts are in the sub-directory.
+elif ! which $INSTALLER > $NULL; then   # ~/bin is absent in $PATH
+    if [ -x $BIN/$INSTALLER ]; then
+        PATH=$PATH:$BIN; bash $0
+    else
+        echo "Please download my scripts."
+        echo "Visit https://github.com/leorge/scripts and read the README.md below in the page."
+        echo "Please logout and login again."
+    fi
+elif [ -d $REPO ]; then # Scripts maybe in the sub-directory.
     pushd $REPO && bash $myName && popd && rm -f $myName
 elif $INSTALLER git; then   # not in a repository
     git clone https://github.com/leorge/$REPO.git && \
-    addpath $PWD/$REPO && rm -f $myName
-elif $INSTALLER unzip; then # unzip(1) is available
-    ZIP=master.zip
-    wget -N https://github.com/leorge/$REPO/archive/$ZIP && \
     addpath $PWD/$REPO && rm -f $myName
 else
     ERR=$?
