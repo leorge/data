@@ -10,7 +10,7 @@ elif [ -d $myDir/.git ]; then  # in a git repository
         echo This repository \"$repository\" is not \"$REPO\".
     else
         $INSTALLER git && git pull
-        addpath $myDir      # a script "addpath" should be also installed
+        addpath ${myDir/^\.\/?/$PWD/}   # a script "addpath" should be also installed
     fi
 elif [ -d $myDir/$REPO ]; then  # data generators maybe in the sub-directory.
     bash $myDir/$REPO/$SETUP && rm -f $0
