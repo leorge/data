@@ -6,8 +6,8 @@ if [ -d $myDir/.git ]; then  # in a git repository
     if [ $repository != $REPO ]; then
         echo This repository \"$repository\" is not \"$REPO\".
         exit 1
-    elif
-        which $INSTALLER > $NULL; then && $INSTALLER git && git pull
+    else
+        which $INSTALLER > $NULL && $INSTALLER git && git pull
         addpath $PWD                    # a script "addpath" should be also installed
     fi
 elif [ -d $myDir/$REPO ]; then  # data generators maybe in the sub-directory.
