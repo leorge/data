@@ -1,30 +1,23 @@
 myName=`basename $0`; myDir=`dirname $0`; SETUP=setup
 echo \$0=$0 myDir=\"$myDir\" myName=\"$myName\"
 REPO=data; INSTALLER=inst_cmd; BIN=~/bin; NULL=/dev/null
-if [ -d $myDir/.git ]; then  # in a git repository
+if ! which $INSTALLER > $NULL; then     # The installer is not available.
+    echo "Please setup scripts first." >& 2
+    echo "Visit https://github.com/leorge/scripts and read the guidance below in the page." >& 2
+elif [ -d $myDir/.git ]; then  # in a git repository
     repository=`grep "url = " $myDir/.git/config | sed 's#.*/\(.*\)\.git#\1#'`
     if [ $repository != $REPO ]; then
         echo This repository \"$repository\" is not \"$REPO\".
-        exit 1
     else
-        which $INSTALLER > $NULL && $INSTALLER git && git pull
+        $INSTALLER git && git pull
         addpath $myDir      # a script "addpath" should be also installed
     fi
 elif [ -d $myDir/$REPO ]; then  # data generators maybe in the sub-directory.
-    bash $myDir/$REPO && rm -f $0
+    bash $myDir/$REPO/$SETUP && rm -f $0
 else    # get the repository
-    if ! which $INSTALLER > $NULL; then     # The installer is not available.
-        if [ -x $BIN/$INSTALLER ]; then     # The installer exists in $HOME/bin
-            PATH=$PATH:$BIN
-        else
-            echo "Please download my scripts first."
-            echo "Visit https://github.com/leorge/scripts and read the README.md below in the page."
-            exit 1
-        fi
-    fi
     if ! $INSTALLER git; then   # not in a repository
         ERR=$?
-        echo "You can not install both git and unzip." >&2
+        echo "You can not install git." >&2
         echo "Please clone the repository \"$REPO\" under another operating system, then retry." >&2
         exit $ERR
     elif git clone https://github.com/leorge/$REPO.git; then
