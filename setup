@@ -1,7 +1,7 @@
 myName=`basename $0`; myDir=`dirname $0`; SETUP=setup
 #echo \$0=$0 myDir=\"$myDir\" myName=\"$myName\"
 REPO=data; INSTALLER=inst_cmd; BIN=~/bin; NULL=/dev/null
-if ! which $INSTALLER > $NULL; then     # The installer is not available.
+if ! which $INSTALLER 2>&1 >$NULL; then     # The installer is not available.
     echo "Please setup scripts first." >& 2
     echo "Visit https://github.com/leorge/scripts and read the guidance below in the page." >& 2
 elif [ -d $myDir/.git ]; then  # in a git repository
