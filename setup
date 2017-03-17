@@ -10,7 +10,10 @@ elif [ -d $myDir/.git ]; then  # in a git repository
         echo This repository \"$repository\" is not \"$REPO\".
         exit 1
     else
-        $INSTALLER git 2>&1 > $NULL && cd $myDir && git pull
+        $INSTALLER git 2>&1 > $NULL; then
+            cd $myDir && git pull
+            $INSTALLER gawk perl
+        fi
         addpath $myDir
     fi
 elif [ -d $myDir/$REPO ]; then  # data generators maybe in the sub-directory.
@@ -22,6 +25,7 @@ else    # get the repository
         echo "Please clone the repository \"$REPO\" under another operating system, then retry me." >&2
         exit $ERR
     elif git clone https://github.com/leorge/$REPO.git; then
+        $INSTALLER gawk perl
         addpath $myDir && rm -f $0
     fi
 fi
