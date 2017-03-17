@@ -22,6 +22,6 @@ else    # get the repository
         echo "Please clone the repository \"$REPO\" under another operating system, then retry me." >&2
         exit $ERR
     elif git clone https://github.com/leorge/$REPO.git; then
-        addpath $myDir/$REPO && rm -f $0
+        addpath $myDir && rm -f $0
     fi
 fi
