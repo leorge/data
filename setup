@@ -10,7 +10,7 @@ elif [ -d $myDir/.git ]; then  # in a git repository
         echo This repository \"$repository\" is not \"$REPO\".
         exit 1
     else
-        $INSTALLER git > $NULL && git pull
+        $INSTALLER git 2>&1 > $NULL && git pull
         addpath $myDir
     fi
 elif [ -d $myDir/$REPO ]; then  # data generators maybe in the sub-directory.
