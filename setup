@@ -2,8 +2,7 @@ myName=`basename $0`; myDir=`dirname $0`; SETUP=setup
 #echo \$0=$0 myDir=\"$myDir\" myName=\"$myName\"
 REPO=data; INSTALLER=inst_cmd; BIN=~/bin; NULL=/dev/null
 if ! which $INSTALLER > $NULL; then     # The installer is not available.
-    echo "Please setup scripts first." >& 2
-    echo "Visit https://github.com/leorge/scripts and read the guidance below in the page." >& 2
+    echo "Please visit https://github.com/leorge/scripts to install scripts." >& 2
 elif [ -d $myDir/.git ]; then  # in a git repository
     repository=`grep "url = " $myDir/.git/config | sed 's#.*/\(.*\)\.git#\1#'`
     if [ $repository != $REPO ]; then
@@ -26,6 +25,6 @@ else    # get the repository
         exit $ERR
     elif git clone https://github.com/leorge/$REPO.git; then
         $INSTALLER gawk perl
-        addpath $myDir && rm -f $0
+        addpath $myDir/$REPO && rm -f $0
     fi
 fi
