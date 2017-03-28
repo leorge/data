@@ -25,6 +25,6 @@ else    # get the repository
         exit $ERR
     elif git clone https://github.com/leorge/$REPO.git; then
         $INSTALLER gawk perl
-        addpath $myDir/$REPO && rm -f $0
+        addpath `pwd`/$REPO && rm -f $0
     fi
 fi
