@@ -13,7 +13,7 @@ elif [ -d $myDir/.git ]; then  # in a git repository
             cd $myDir && git pull
             $INSTALLER gawk perl
         fi
-        addpath $myDir
+        addpath `pwd`
     fi
 elif [ -d $myDir/$REPO ]; then  # data generators maybe in the sub-directory.
     bash $myDir/$REPO/$SETUP && rm -f $0
