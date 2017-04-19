@@ -1,9 +1,7 @@
 myName=`basename $0`; myDir=`dirname $0`; SETUP=setup
 #echo \$0=$0 myDir=\"$myDir\" myName=\"$myName\"
 REPO=data; INSTALLER=inst_cmd; BIN=~/bin; NULL=/dev/null
-if ! which $INSTALLER > $NULL; then     # The installer is not available.
-    echo "Please visit https://github.com/leorge/scripts to install scripts." >& 2
-elif [ -d $myDir/.git ]; then  # in a git repository
+if [ -d $myDir/.git ]; then  # in a git repository
     repository=`grep "url = " $myDir/.git/config | sed 's#.*/\(.*\)\.git#\1#'`
     if [ $repository != $REPO ]; then
         echo This repository \"$repository\" is not \"$REPO\".
@@ -18,7 +16,9 @@ elif [ -d $myDir/.git ]; then  # in a git repository
 elif [ -d $myDir/$REPO ]; then  # data generators maybe in the sub-directory.
     bash $myDir/$REPO/$SETUP && rm -f $0
 else    # get the repository
-    if ! $INSTALLER git; then   # git(1) is absent, and can't be installed.
+    if ! which $INSTALLER > $NULL; then     # The installer is not available.
+        echo "Please visit https://github.com/leorge/scripts to install scripts." >& 2
+    elif ! $INSTALLER git; then   # git(1) is absent, and can't be installed.
         ERR=$?
         echo "You can not install git(1)." >&2
         echo "Please clone the repository \"$REPO\" under another operating system, then retry me." >&2
