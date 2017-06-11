@@ -1,7 +1,3 @@
 # data
 
-Please setup my [scripts](https://github.com/leorge/scripts) first.
-
-    $ cd ~/bin  # or another
-    $ wget https://github.com/leorge/data/raw/master/setup
-    $ bash setup
+What is [malicious data](https://github.com/leorge/qmisort/wiki/Malicious-data) sequence.
