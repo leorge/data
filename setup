@@ -4,6 +4,6 @@ if ! which $INSTALLER > $NULL; then     # The installer is not available.
 elif [ -d .git ]; then  # in a git repository
     git pull 2>$NULL
     addpath $PWD
-else git clone https://github.com/leorge/$REPO.git; then
+elif git clone https://github.com/leorge/$REPO.git; then
     pushd $REPO; bash ./`basename $0`; popd; rm -f $0 # run cloned script
 fi
