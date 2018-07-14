@@ -1,3 +1,3 @@
 # data
 
-[Malicious data](https://github.com/leorge/qmisort/wiki/Malicious-data) sequence for quicksort.
+[Malicious data](https://gitlab.com/qmisort/qmisort/wiki/Malicious-data) sequence for quicksort.
