@@ -1,9 +1,0 @@
-REPO=data; INSTALLER=inst_cmd; NULL=/dev/null
-if ! which $INSTALLER > $NULL; then     # The installer is not available.
-    echo "Please visit https://github.com/leorge/scripts to install my scripts." >& 2
-elif [ -d .git ]; then  # in a git repository
-    git pull 2>$NULL
-    addpath $PWD
-elif git clone https://github.com/leorge/$REPO.git; then
-    pushd $REPO; bash ./`basename $0`; popd; rm -f $0 # run cloned script
-fi
